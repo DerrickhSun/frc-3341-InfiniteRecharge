@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.MoveAndAlignToBall;
+import frc.robot.commands.StraightDrive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.NavX;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,8 +28,11 @@ public class RobotContainer {
   public DriveTrain drive = new DriveTrain();
   public NavX navx = new NavX();
 
-  private final MoveAndAlignToBall m_autoCommand = new MoveAndAlignToBall(drive);
+  //change path by commenting lines here
 
+  //private final MoveAndAlignToBall m_autoCommand = new MoveAndAlignToBall(drive);
+  private final StraightDrive m_autoCommand = new StraightDrive(1.0, drive);
+  
   private Joystick leftJoy;
   private Joystick rightJoy;
 
