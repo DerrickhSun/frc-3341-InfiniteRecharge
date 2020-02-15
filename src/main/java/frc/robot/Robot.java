@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
+  private Command Invert;
   public static RobotContainer m_robotContainer;
 
   /**
@@ -96,8 +96,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-  }
+    m_robotContainer.getInvertButton().whenReleased(Invert);
+    if(!m_robotContainer.drive.getInverted()){
+      m_robotContainer.drive.tankDrive(Robot.m_robotContainer.getLeftJoy().getY(), Robot.m_robotContainer.getRightJoy().getY());
 
+    }
+    else{
+      m_robotContainer.drive.tankDrive(-Robot.m_robotContainer.getLeftJoy().getY(), -Robot.m_robotContainer.getRightJoy().getY());
+    }
+  }
   @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.

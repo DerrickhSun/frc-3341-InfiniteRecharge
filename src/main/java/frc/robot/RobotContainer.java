@@ -11,9 +11,11 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Invert;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -29,16 +31,21 @@ public class RobotContainer {
   public DriveTrain drive = new DriveTrain();
   private Joystick leftJoy;
   private Joystick rightJoy;
-
-
+  private JoystickButton invertButton;
+  private final Invert invertCommand = new Invert(drive);
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     leftJoy = new Joystick(2);
     rightJoy = new Joystick(3);
+    invertButton = new JoystickButton(leftJoy, 1);
     // Configure the button bindings
     configureButtonBindings();
+  }
+
+  public JoystickButton getInvertButton(){
+    return invertButton;
   }
   public Joystick getLeftJoy(){
     return leftJoy;
@@ -64,5 +71,8 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
+  }
+  public Command getInvert(){
+    return invertCommand;
   }
 }
